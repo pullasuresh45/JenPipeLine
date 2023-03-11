@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage("git"){
+            steps{
+            git 'https://github.com/pullasuresh45/MavenProject.git'
+        }
+        }
+        stage("build"){
+            steps{
+            sh "mvn clean install"
+                 }
+        }
+        stage("Verify Versions"){
+            steps{
+            sh ''' 
+                java -version
+                mvn -version
+                '''
+                 }
+        }
+    }
+}
